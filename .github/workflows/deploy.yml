@@ -9,13 +9,16 @@ concurrency:
   group: deploy-${{ github.ref }}
   cancel-in-progress: true
 
+# Required permissions for GitHub Pages deployment via Actions
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  deploy-portfolio:
-    name: Deploy portfolio → seanhoots.com
+  build:
+    name: Build site
     runs-on: ubuntu-latest
-    environment:
-      name: production-portfolio
-      url: https://seanhoots.com
     steps:
       - uses: actions/checkout@v4
 
@@ -34,44 +37,30 @@ jobs:
       - name: Build portfolio
         run: pnpm --filter portfolio build
 
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_PORTFOLIO }}
-          vercel-args: '--prod'
-          working-directory: apps/portfolio
-
-  deploy-blog:
-    name: Deploy blog → blog.seanhoots.com
-    runs-on: ubuntu-latest
-    environment:
-      name: production-blog
-      url: https://blog.seanhoots.com
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Build blog
         run: pnpm --filter blog build
 
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
+      - name: Assemble site artifact
+        run: |
+          mkdir -p dist
+          cp -r apps/portfolio/dist/. dist/
+          mkdir -p dist/blog
+          cp -r apps/blog/dist/. dist/blog/
+          echo "seanlavoie.com" > dist/CNAME
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_BLOG }}
-          vercel-args: '--prod'
-          working-directory: apps/blog
+          path: dist/
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        id: deployment

@@ -6,7 +6,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   integrations: [tailwind(), mdx(), sitemap()],
   output: 'static',
-  site: 'https://blog.seanhoots.com', // update to your blog subdomain or path
+  site: 'https://seanlavoie.com',
+  base: '/blog',
   markdown: {
     shikiConfig: {
       theme: 'github-dark',
