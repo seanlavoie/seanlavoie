@@ -1,0 +1,27 @@
+---
+import { profile } from '@/data/profile';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-slate-800/50 py-8">
+  <div class="mx-auto max-w-5xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-xs text-slate-500 font-mono">
+      © {year} {profile.name} — built with Astro
+    </p>
+    <div class="flex items-center gap-6">
+      <a href={profile.links.github} target="_blank" rel="noopener noreferrer"
+         class="text-xs text-slate-500 hover:text-slate-300 transition-colors font-mono">
+        GitHub
+      </a>
+      <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer"
+         class="text-xs text-slate-500 hover:text-slate-300 transition-colors font-mono">
+        LinkedIn
+      </a>
+      <a href={profile.links.blog}
+         class="text-xs text-slate-500 hover:text-slate-300 transition-colors font-mono">
+        Blog
+      </a>
+    </div>
+  </div>
+</footer>

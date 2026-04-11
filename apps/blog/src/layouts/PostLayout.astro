@@ -1,0 +1,84 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, tags } = post.data;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const formattedUpdated = updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description} pubDate={pubDate}>
+  <header class="border-b border-slate-800/50">
+    <div class="mx-auto max-w-2xl px-6 py-6 flex items-center justify-between">
+      <a href="/" class="font-mono text-sm text-brand-400 hover:text-brand-300 transition-colors">
+        ← back
+      </a>
+      <a href="/rss.xml" class="font-mono text-xs text-slate-500 hover:text-slate-400 transition-colors">
+        RSS
+      </a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-2xl px-6 py-16">
+    <article>
+      <header class="mb-12">
+        <div class="flex flex-wrap gap-2 mb-4">
+          {tags.map((tag) => (
+            <a
+              href={`/tags/${tag}`}
+              class="rounded-md bg-slate-800 px-2 py-1 font-mono text-xs text-slate-400 hover:text-slate-200 transition-colors"
+            >
+              #{tag}
+            </a>
+          ))}
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-4 leading-tight text-balance">
+          {title}
+        </h1>
+        <p class="text-slate-400 text-lg leading-relaxed mb-6">{description}</p>
+        <div class="flex items-center gap-4 text-sm text-slate-500 font-mono border-t border-slate-800 pt-4">
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          {formattedUpdated && (
+            <span class="text-slate-600">
+              Updated {formattedUpdated}
+            </span>
+          )}
+        </div>
+      </header>
+
+      <div class="prose prose-invert prose-slate max-w-none
+        prose-headings:font-bold prose-headings:text-slate-100
+        prose-p:text-slate-300 prose-p:leading-relaxed
+        prose-a:text-brand-400 prose-a:no-underline hover:prose-a:underline
+        prose-strong:text-slate-100
+        prose-code:text-brand-300 prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
+        prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800
+        prose-blockquote:border-brand-600 prose-blockquote:text-slate-400
+        prose-hr:border-slate-800
+        prose-li:text-slate-300">
+        <slot />
+      </div>
+    </article>
+
+    <footer class="mt-16 pt-8 border-t border-slate-800">
+      <a href="/" class="text-sm text-slate-400 hover:text-slate-100 transition-colors font-mono">
+        ← all posts
+      </a>
+    </footer>
+  </main>
+</BaseLayout>

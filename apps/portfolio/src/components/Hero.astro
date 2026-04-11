@@ -1,0 +1,77 @@
+---
+import { profile } from '@/data/profile';
+---
+
+<section id="hero" class="relative min-h-screen flex items-center pt-20">
+  <div class="mx-auto max-w-5xl px-6 py-24 w-full">
+    <div class="max-w-2xl">
+      <!-- Staggered entrance: each element animates in with 60ms stagger -->
+      <p
+        class="hero-animate font-mono text-sm text-brand-400 mb-4 tracking-wide"
+        style="animation-delay: 0ms"
+      >
+        Hi, I'm
+      </p>
+      <h1
+        class="hero-animate hero-name-glow text-5xl sm:text-6xl font-bold text-slate-100 mb-4 leading-tight"
+        style="animation-delay: 60ms"
+      >
+        {profile.name}
+      </h1>
+      <h2
+        class="hero-animate text-2xl sm:text-3xl font-semibold text-slate-400 mb-6"
+        style="animation-delay: 120ms"
+      >
+        {profile.title}
+      </h2>
+      <p
+        class="hero-animate text-lg text-slate-300 leading-relaxed mb-10 max-w-xl"
+        style="animation-delay: 180ms"
+      >
+        {profile.tagline}
+      </p>
+      <!-- Mobile: stack full-width; sm+: side by side -->
+      <div
+        class="hero-animate flex flex-col sm:flex-row gap-4"
+        style="animation-delay: 240ms"
+      >
+        <a
+          href="#projects"
+          class="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-500 transition-colors"
+        >
+          View my work
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-500 hover:text-slate-100 transition-colors"
+        >
+          Get in touch
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator: deliberate slow pulse, not bouncy -->
+  <div
+    class="scroll-indicator absolute bottom-8 left-1/2 flex flex-col items-center gap-1 text-slate-500"
+    aria-hidden="true"
+  >
+    <span class="font-mono text-xs tracking-widest">scroll</span>
+    <svg
+      width="16"
+      height="20"
+      viewBox="0 0 16 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="opacity-70"
+    >
+      <path
+        d="M8 1L8 15M8 15L2 9M8 15L14 9"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </div>
+</section>

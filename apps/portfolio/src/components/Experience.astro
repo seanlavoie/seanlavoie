@@ -1,0 +1,47 @@
+---
+import { experience } from '@/data/experience';
+---
+
+{experience.length > 0 && (
+  <section id="experience" class="py-24 border-t border-slate-800/50">
+    <div class="mx-auto max-w-5xl px-6">
+
+      <div class="reveal">
+        <p class="font-mono text-sm text-brand-400 mb-2 tracking-wide">03. experience</p>
+        <h2 class="text-3xl font-bold text-slate-100 mb-12">Where I've worked</h2>
+      </div>
+
+      <div class="space-y-10">
+        {experience.map((role, i) => (
+          <div class="reveal relative pl-6 border-l border-slate-800">
+            <div class={`absolute -left-1.5 top-1.5 h-3 w-3 rounded-full border-2 bg-slate-950 ${i === 0 ? 'border-brand-400' : 'border-brand-500'}`} />
+            <div class="mb-1 flex flex-wrap items-baseline gap-3">
+              <h3 class="text-lg font-semibold text-slate-100">{role.title}</h3>
+              <span class="text-slate-400">@ {role.company}</span>
+              <span class="font-mono text-xs text-slate-500 sm:ml-auto block sm:inline w-full sm:w-auto mt-0.5 sm:mt-0">
+                {role.period}
+              </span>
+            </div>
+            <p class="text-sm text-slate-400 mb-4 leading-relaxed">{role.description}</p>
+            <ul class="space-y-2 mb-4">
+              {role.highlights.map((h) => (
+                <li class="flex items-start gap-2 text-sm text-slate-300">
+                  <span class="mt-1 text-brand-400 font-mono text-xs shrink-0">▸</span>
+                  {h}
+                </li>
+              ))}
+            </ul>
+            <div class="flex flex-wrap gap-2">
+              {role.tags.map((tag) => (
+                <span class="rounded-md bg-slate-800/80 px-2 py-0.5 font-mono text-xs text-slate-400">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+)}

@@ -1,0 +1,152 @@
+---
+import { profile } from '@/data/profile';
+
+const navLinks = [
+  { href: '#about', label: 'About' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#contact', label: 'Contact' },
+  { href: profile.links.blog, label: 'Blog' },
+];
+---
+
+<!-- Skip to content: hidden until focused, keyboard-accessible -->
+<a
+  href="#about"
+  class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:outline-none"
+>
+  Skip to content
+</a>
+
+<nav
+  id="main-nav"
+  class="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-sm transition-shadow duration-200"
+>
+  <div class="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
+    <a href="/" class="font-mono text-sm font-medium text-brand-400 hover:text-brand-300 transition-colors">
+      {profile.handle}.com
+    </a>
+
+    <!-- Desktop nav links -->
+    <ul class="hidden md:flex items-center gap-6">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            data-nav-link
+            class="nav-link text-sm text-slate-400 hover:text-slate-100 transition-colors"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Hamburger button (mobile only) -->
+    <button
+      id="menu-toggle"
+      class="md:hidden flex flex-col items-center justify-center w-9 h-9 gap-[5px] rounded focus:outline-none focus-visible:outline-2 focus-visible:outline-brand-500"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="block w-5 h-px bg-slate-400 transition-all duration-200 origin-center" id="bar1"></span>
+      <span class="block w-5 h-px bg-slate-400 transition-all duration-200" id="bar2"></span>
+      <span class="block w-5 h-px bg-slate-400 transition-all duration-200 origin-center" id="bar3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-slate-800/60 bg-slate-900/95 backdrop-blur-sm"
+    role="dialog"
+    aria-label="Navigation menu"
+  >
+    <ul class="mx-auto max-w-5xl px-6 py-2">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            data-mobile-nav-link
+            class="block py-3 text-sm text-slate-400 hover:text-slate-100 transition-colors border-b border-slate-800/40 last:border-0"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  // ── Hamburger menu toggle ──
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar1');
+  const bar2 = document.getElementById('bar2');
+  const bar3 = document.getElementById('bar3');
+
+  function openMenu() {
+    menu?.classList.remove('hidden');
+    toggle?.setAttribute('aria-expanded', 'true');
+    // Animate bars into an X
+    bar1?.classList.add('rotate-45', 'translate-y-[6px]');
+    bar2?.classList.add('opacity-0');
+    bar3?.classList.add('-rotate-45', '-translate-y-[6px]');
+  }
+
+  function closeMenu() {
+    menu?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+    bar1?.classList.remove('rotate-45', 'translate-y-[6px]');
+    bar2?.classList.remove('opacity-0');
+    bar3?.classList.remove('-rotate-45', '-translate-y-[6px]');
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  // Close drawer when a mobile link is tapped
+  document.querySelectorAll('[data-mobile-nav-link]').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close drawer on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+    }
+  });
+
+  // ── Scroll shadow ──
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav?.classList.toggle('shadow-lg', window.scrollY > 10);
+    nav?.classList.toggle('shadow-slate-950/50', window.scrollY > 10);
+  }, { passive: true });
+
+  // ── Active section highlighting via Intersection Observer ──
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach((link) => {
+          const isActive = link.getAttribute('href') === `#${id}`;
+          link.classList.toggle('active', isActive);
+        });
+      }
+    });
+  }, {
+    rootMargin: '-80px 0px -60% 0px',
+    threshold: 0,
+  });
+
+  document.querySelectorAll('section[id]').forEach((section) => {
+    sectionObserver.observe(section);
+  });
+</script>

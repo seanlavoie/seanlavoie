@@ -1,0 +1,131 @@
+---
+import { projects } from '@/data/projects';
+
+const statusLabel: Record<string, string> = {
+  active: 'Active',
+  wip: 'WIP',
+  archived: 'Archived',
+};
+
+const statusColor: Record<string, string> = {
+  active: 'text-green-400 bg-green-400/10',
+  wip: 'text-yellow-400 bg-yellow-400/10',
+  archived: 'text-slate-400 bg-slate-400/10',
+};
+
+// First featured project gets full-width treatment; rest fill the grid
+const featuredProject = projects.find((p) => p.featured) ?? null;
+const remainingProjects = projects.filter((p) => p !== featuredProject);
+---
+
+<section id="projects" class="py-24 border-t border-slate-800/50">
+  <div class="mx-auto max-w-5xl px-6">
+
+    <div class="reveal">
+      <p class="font-mono text-sm text-brand-400 mb-2 tracking-wide">02. projects</p>
+      <h2 class="text-3xl font-bold text-slate-100 mb-12">Things I've built</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Featured project: full-width, larger layout -->
+      {featuredProject && (
+        <article class="reveal group md:col-span-2 rounded-xl border border-slate-800 bg-slate-900/50 p-8 hover:border-slate-600 hover:-translate-y-0.5 card-shadow card-shadow-hover transition-all duration-200 ease-out flex flex-col gap-5">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-xl font-semibold text-slate-100 group-hover:text-brand-300 transition-colors">
+              {featuredProject.title}
+            </h3>
+            <span class={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${statusColor[featuredProject.status]}`}>
+              {statusLabel[featuredProject.status]}
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-400 leading-relaxed max-w-2xl">
+            {featuredProject.description}
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+            {featuredProject.tags.map((tag) => (
+              <span class="rounded-md bg-slate-800 px-2 py-1 font-mono text-xs text-slate-400">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div class="flex items-center gap-4 pt-2 border-t border-slate-800">
+            {featuredProject.repo && (
+              <a
+                href={featuredProject.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-slate-400 hover:text-slate-100 transition-colors flex items-center gap-1"
+              >
+                <span class="font-mono">↗</span> Source
+              </a>
+            )}
+            {featuredProject.url && (
+              <a
+                href={featuredProject.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-slate-400 hover:text-slate-100 transition-colors flex items-center gap-1"
+              >
+                <span class="font-mono">↗</span> Live
+              </a>
+            )}
+          </div>
+        </article>
+      )}
+
+      <!-- Remaining projects: standard 2-col grid cards -->
+      {remainingProjects.map((project) => (
+        <article class="reveal group rounded-xl border border-slate-800 bg-slate-900/50 p-6 hover:border-slate-600 hover:-translate-y-0.5 card-shadow card-shadow-hover transition-all duration-200 ease-out flex flex-col gap-4">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-slate-100 group-hover:text-brand-300 transition-colors">
+              {project.title}
+            </h3>
+            <span class={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${statusColor[project.status]}`}>
+              {statusLabel[project.status]}
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-400 leading-relaxed flex-1">
+            {project.description}
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span class="rounded-md bg-slate-800 px-2 py-1 font-mono text-xs text-slate-400">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div class="flex items-center gap-4 pt-2 border-t border-slate-800">
+            {project.repo && (
+              <a
+                href={project.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-slate-400 hover:text-slate-100 transition-colors flex items-center gap-1"
+              >
+                <span class="font-mono">↗</span> Source
+              </a>
+            )}
+            {project.url && (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-slate-400 hover:text-slate-100 transition-colors flex items-center gap-1"
+              >
+                <span class="font-mono">↗</span> Live
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+
+    </div>
+  </div>
+</section>

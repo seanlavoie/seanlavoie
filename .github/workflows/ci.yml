@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-portfolio:
+    name: Build portfolio
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type-check portfolio
+        run: pnpm --filter portfolio check
+
+      - name: Build portfolio
+        run: pnpm --filter portfolio build
+
+      - name: Upload portfolio artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-dist
+          path: apps/portfolio/dist/
+          retention-days: 7
+
+  build-blog:
+    name: Build blog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type-check blog
+        run: pnpm --filter blog check
+
+      - name: Build blog
+        run: pnpm --filter blog build
+
+      - name: Upload blog artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blog-dist
+          path: apps/blog/dist/
+          retention-days: 7
