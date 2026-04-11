@@ -1,0 +1,95 @@
+---
+import { profile } from '@/data/profile';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = profile.name,
+  description = profile.tagline,
+  ogImage,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === profile.name ? title : `${title} — ${profile.name}`;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased">
+    <slot />
+  </body>
+</html>
+
+<script>
+  // ── Scroll-triggered section reveals ──
+  // Observes all elements with `.reveal`, adds `.is-visible` with
+  // staggered transition-delay per sibling index. Once-only (unobserve after trigger).
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        // Find all reveal children within this section, or just the element itself
+        const target = entry.target;
+        const revealEls = target.classList.contains('reveal')
+          ? [target]
+          : Array.from(target.querySelectorAll<HTMLElement>('.reveal'));
+
+        revealEls.forEach((el, i) => {
+          (el as HTMLElement).style.transitionDelay = `${i * 60}ms`;
+          el.classList.add('is-visible');
+        });
+
+        revealObserver.unobserve(target);
+      });
+    },
+    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  // Observe each section (children with .reveal animate when section enters)
+  document.querySelectorAll('section').forEach((section) => {
+    revealObserver.observe(section);
+  });
+
+  // Also observe standalone .reveal elements not inside sections
+  document.querySelectorAll('.reveal').forEach((el) => {
+    const inSection = el.closest('section');
+    if (!inSection) revealObserver.observe(el);
+  });
+</script>

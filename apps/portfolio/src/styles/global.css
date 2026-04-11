@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  ::selection {
+    @apply bg-brand-600/30 text-brand-100;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-500;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Subtle noise texture overlay on the page background */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* =============================================
+   HERO ENTRANCE ANIMATIONS
+   Staggered slide-up + fade with thocky easing.
+   Each hero element sets animation-delay inline.
+============================================= */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate {
+  opacity: 0;
+  animation: heroFadeUp 250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* =============================================
+   SCROLL INDICATOR
+   Deliberate, slow pulse — not bouncy.
+============================================= */
+@keyframes scrollPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 0.75;
+    transform: translateX(-50%) translateY(5px);
+  }
+}
+
+.scroll-indicator {
+  animation: scrollPulse 2.4s ease-in-out infinite;
+}
+
+/* =============================================
+   SCROLL-TRIGGERED SECTION REVEALS
+   Elements with .reveal start hidden.
+   JS adds .is-visible with staggered delay.
+   Once-only via unobserve after trigger.
+============================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 300ms ease-out, transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================================
+   ACTIVE NAV LINK
+   Applied via JS when section is in viewport.
+============================================= */
+.nav-link.active {
+  color: #38bdf8; /* brand-400 */
+}
+
+/* =============================================
+   HERO NAME GLOW
+   Backlit keycap effect — subtle brand luminance.
+   10–15% opacity, not a neon sign.
+============================================= */
+.hero-name-glow {
+  filter: drop-shadow(0 0 14px rgba(14, 165, 233, 0.13));
+}
+
+/* =============================================
+   LAYERED CARD SHADOWS
+   Tight inner shadow for depth + soft outer for lift.
+============================================= */
+.card-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-shadow-hover:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.2);
+}

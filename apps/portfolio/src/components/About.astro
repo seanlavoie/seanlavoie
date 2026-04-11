@@ -1,0 +1,65 @@
+---
+import { profile } from '@/data/profile';
+
+// Skills grouped by category (wireframe spec: Languages / Infrastructure / Data)
+const skillGroups = [
+  {
+    label: 'Languages',
+    skills: ['Go', 'TypeScript', 'Rust', 'Python'],
+  },
+  {
+    label: 'Infrastructure',
+    skills: ['Kubernetes', 'Terraform', 'AWS'],
+  },
+  {
+    label: 'Data',
+    skills: ['PostgreSQL'],
+  },
+];
+---
+
+<section id="about" class="py-24 border-t border-slate-800/50">
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+      <!-- Left column: bio -->
+      <div class="reveal">
+        <p class="font-mono text-sm text-brand-400 mb-2 tracking-wide">01. about</p>
+        <h2 class="text-3xl font-bold text-slate-100 mb-8">About me</h2>
+        <div class="space-y-4">
+          {profile.bio.map((paragraph) => (
+            <p class="text-slate-300 leading-relaxed">{paragraph}</p>
+          ))}
+        </div>
+        <p class="mt-6 text-sm text-slate-400 italic">{profile.availability}</p>
+      </div>
+
+      <!-- Right column: skills only (Links box removed — lives in Contact + Footer) -->
+      <div class="reveal">
+        <div class="rounded-xl border border-slate-800 bg-slate-900/50 p-6 card-shadow">
+          <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-5">
+            Currently working with
+          </h3>
+          <div class="space-y-5">
+            {skillGroups.map((group) => (
+              <div>
+                <p class="text-xs font-mono uppercase tracking-wider text-slate-500 mb-2">
+                  {group.label}
+                </p>
+                <ul class="flex flex-wrap gap-x-6 gap-y-1">
+                  {group.skills.map((skill) => (
+                    <li class="flex items-center gap-2 text-sm text-slate-300">
+                      <span class="text-brand-400 font-mono text-xs">▸</span>
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

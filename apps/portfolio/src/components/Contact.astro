@@ -1,0 +1,52 @@
+---
+import { profile } from '@/data/profile';
+---
+
+<section id="contact" class="py-24 border-t border-slate-800/50">
+  <div class="mx-auto max-w-5xl px-6">
+
+    <div class="reveal">
+      <p class="font-mono text-sm text-brand-400 mb-2 tracking-wide">04. contact</p>
+      <h2 class="text-3xl font-bold text-slate-100 mb-4">Get in touch</h2>
+
+      <!-- Availability status indicator -->
+      <div class="flex items-center gap-2 mb-6">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" aria-hidden="true"></span>
+        <span class="text-sm text-green-400 font-mono">Available for projects</span>
+      </div>
+
+      <p class="text-slate-400 max-w-lg mb-10 leading-relaxed">
+        I'm always open to interesting conversations — whether it's a collaboration,
+        an opportunity, or just a good technical discussion.
+      </p>
+    </div>
+
+    <!-- Mobile: stack full-width; sm+: side by side -->
+    <div class="reveal flex flex-col sm:flex-row gap-4">
+      <a
+        href={`mailto:${profile.links.email}`}
+        class="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-500 transition-colors"
+      >
+        <span class="font-mono text-xs">✉</span>
+        {profile.links.email}
+      </a>
+      <a
+        href={profile.links.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-500 hover:text-slate-100 transition-colors"
+      >
+        GitHub ↗
+      </a>
+      <a
+        href={profile.links.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-500 hover:text-slate-100 transition-colors"
+      >
+        LinkedIn ↗
+      </a>
+    </div>
+
+  </div>
+</section>
