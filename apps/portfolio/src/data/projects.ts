@@ -12,10 +12,10 @@ export const projects: Project[] = [
   {
     title: 'Personal Site & Blog',
     description:
-      'This site — a monorepo housing a portfolio and blog, built with Astro and Tailwind, deployed to static hosting. Clean output, zero client JS by default.',
+      'This site — a monorepo housing a portfolio and blog, built with Astro and Tailwind, deployed to GitHub Pages. Clean static output, zero client JS by default.',
     tags: ['Astro', 'TypeScript', 'Tailwind', 'pnpm workspaces'],
-    repo: 'https://github.com/sean/personal-site', // update
-    url: 'https://seanhoots.com',                  // update
+    repo: 'https://github.com/seanlavoie/seanlavoie',
+    url: 'https://seanlavoie.com',
     featured: true,
     status: 'active',
   },

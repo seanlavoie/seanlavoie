@@ -1,5 +1,6 @@
 export const profile = {
-  name: 'Sean',
+  name: 'Sean Lavoie',
+  handle: 'seanlavoie',
   title: 'Software Engineer',
   tagline: '9+ years building distributed systems, developer tooling, and products at scale.',
   bio: [
@@ -9,9 +10,9 @@ export const profile = {
   location: 'Remote',
   availability: 'Open to interesting projects and conversations.',
   links: {
-    github: 'https://github.com/sean',     // update
-    linkedin: 'https://linkedin.com/in/sean', // update
-    email: 'hello@seanhoots.com',             // update
+    github: 'https://github.com/seanlavoie',
+    linkedin: 'https://linkedin.com/in/seanlavoie', // verify — update if URL slug differs
+    email: 'seanlavoie@gmail.com',                  // update to domain email once hello@seanlavoie.com is configured
     blog: '/blog',
   },
 } as const;
