@@ -19,11 +19,23 @@ const fullTitle = title === profile.name ? title : `${title} — ${profile.name}
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- Prevent FOUC: apply saved theme before first paint -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        ).matches;
+        var isDark = stored ? stored === 'dark' : prefersDark;
+        if (!isDark) document.documentElement.classList.remove('dark');
+      })();
+    </script>
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -51,7 +63,9 @@ const fullTitle = title === profile.name ? title : `${title} — ${profile.name}
 
     <meta name="generator" content={Astro.generator} />
   </head>
-  <body class="bg-slate-950 text-slate-100 antialiased">
+  <body
+    class="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100"
+  >
     <slot />
   </body>
 </html>

@@ -1,25 +1,40 @@
 ---
 import { profile } from '@/data/profile';
+import ThemeSlider from './ThemeSlider.astro';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-slate-800/50 py-8">
-  <div class="mx-auto max-w-5xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <p class="text-xs text-slate-500 font-mono">
-      © {year} {profile.name} — built with Astro
+<footer class="border-t border-slate-200/50 py-8 dark:border-slate-800/50">
+  <div
+    class="mx-auto max-w-5xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+  >
+    <p class="text-xs text-slate-400 font-mono dark:text-slate-500">
+      © {year}
+      {profile.name} — built with Astro
     </p>
+    <ThemeSlider />
     <div class="flex items-center gap-6">
-      <a href={profile.links.github} target="_blank" rel="noopener noreferrer"
-         class="text-xs text-slate-500 hover:text-slate-300 transition-colors font-mono">
+      <a
+        href={profile.links.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs text-slate-400 hover:text-slate-700 transition-colors font-mono dark:text-slate-500 dark:hover:text-slate-300"
+      >
         GitHub
       </a>
-      <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer"
-         class="text-xs text-slate-500 hover:text-slate-300 transition-colors font-mono">
+      <a
+        href={profile.links.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs text-slate-400 hover:text-slate-700 transition-colors font-mono dark:text-slate-500 dark:hover:text-slate-300"
+      >
         LinkedIn
       </a>
-      <a href={profile.links.blog}
-         class="text-xs text-slate-500 hover:text-slate-300 transition-colors font-mono">
+      <a
+        href={profile.links.blog}
+        class="text-xs text-slate-400 hover:text-slate-700 transition-colors font-mono dark:text-slate-500 dark:hover:text-slate-300"
+      >
         Blog
       </a>
     </div>

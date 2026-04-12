@@ -1,0 +1,267 @@
+---
+// Bar heights (px) — a smooth waveform-like pattern across 18 bars
+const barHeights = [
+  5, 8, 13, 18, 22, 18, 14, 20, 26, 22, 26, 20, 14, 18, 22, 13, 8, 5,
+];
+---
+
+<div
+  class="theme-slider-wrap"
+  aria-label="Toggle color theme"
+  title="Toggle light / dark mode"
+>
+  <!-- Moon icon -->
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    class="theme-icon text-slate-400 dark:text-slate-400 shrink-0"
+    aria-hidden="true"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+
+  <!-- Slider track with bar visualizer -->
+  <div class="slider-track-container" id="theme-track">
+    <div class="slider-bars" id="theme-bars">
+      {barHeights.map((h) => <div class="bar" style={`height: ${h}px`} />)}
+    </div>
+    <input
+      type="range"
+      id="theme-slider"
+      min="0"
+      max="100"
+      step="1"
+      value="0"
+      class="slider-input"
+      aria-label="Toggle between dark and light mode"
+    />
+  </div>
+
+  <!-- Sun icon -->
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    class="theme-icon text-slate-400 dark:text-slate-400 shrink-0"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="5"></circle>
+    <line
+      x1="12"
+      y1="1"
+      x2="12"
+      y2="3"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></line>
+    <line
+      x1="12"
+      y1="21"
+      x2="12"
+      y2="23"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></line>
+    <line
+      x1="4.22"
+      y1="4.22"
+      x2="5.64"
+      y2="5.64"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></line>
+    <line
+      x1="18.36"
+      y1="18.36"
+      x2="19.78"
+      y2="19.78"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></line>
+    <line
+      x1="1"
+      y1="12"
+      x2="3"
+      y2="12"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></line>
+    <line
+      x1="21"
+      y1="12"
+      x2="23"
+      y2="12"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></line>
+    <line
+      x1="4.22"
+      y1="19.78"
+      x2="5.64"
+      y2="18.36"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></line>
+    <line
+      x1="18.36"
+      y1="5.64"
+      x2="19.78"
+      y2="4.22"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></line>
+  </svg>
+</div>
+
+<style>
+  .theme-slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+
+  .slider-track-container {
+    position: relative;
+    width: 110px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid rgb(51 65 85 / 0.5);
+    background: rgb(15 23 42 / 0.6);
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      border-color 0.3s,
+      background 0.3s;
+  }
+
+  /* Light mode track */
+  :global(html:not(.dark)) .slider-track-container {
+    border-color: rgb(203 213 225 / 0.7);
+    background: rgb(241 245 249 / 0.8);
+  }
+
+  .slider-bars {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 0 10px;
+    pointer-events: none;
+  }
+
+  .bar {
+    width: 2px;
+    border-radius: 1px;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease;
+    /* default: dark mode — all bars are the "night" color */
+    background-color: rgb(56 189 248 / 0.35);
+  }
+
+  /* Hidden range input overlays the entire track */
+  .slider-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+</style>
+
+<script>
+  const slider = document.getElementById('theme-slider') as HTMLInputElement;
+  const bars = document.querySelectorAll<HTMLElement>('#theme-bars .bar');
+  const html = document.documentElement;
+  const TOTAL = bars.length;
+
+  // Dark-side bar color (night sky blue)
+  const DARK_R = 56,
+    DARK_G = 189,
+    DARK_B = 248;
+  // Light-side bar color (warm amber/sun)
+  const LIGHT_R = 251,
+    LIGHT_G = 146,
+    LIGHT_B = 60;
+
+  function updateBars(value: number) {
+    const split = (value / 100) * TOTAL;
+    bars.forEach((bar, i) => {
+      if (i < split) {
+        // Left of thumb → light-side color (amber), gets brighter toward thumb
+        const intensity = 0.3 + (i / TOTAL) * 0.55;
+        bar.style.backgroundColor = `rgba(${LIGHT_R}, ${LIGHT_G}, ${LIGHT_B}, ${intensity})`;
+      } else {
+        // Right of thumb → dark-side color (blue), dims toward the right
+        const intensity = 0.55 - ((i - split) / TOTAL) * 0.3;
+        bar.style.backgroundColor = `rgba(${DARK_R}, ${DARK_G}, ${DARK_B}, ${Math.max(0.15, intensity)})`;
+      }
+    });
+  }
+
+  function applyTheme(isDark: boolean) {
+    html.classList.add('theme-transitioning');
+    if (isDark) {
+      html.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      html.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+    // Remove transition class once animations complete
+    window.setTimeout(() => html.classList.remove('theme-transitioning'), 300);
+  }
+
+  function animateTo(from: number, to: number, onDone: () => void) {
+    const start = performance.now();
+    const duration = 280;
+
+    function step(now: number) {
+      const t = Math.min((now - start) / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      const current = from + (to - from) * eased;
+      slider.value = String(current);
+      updateBars(current);
+      if (t < 1) {
+        requestAnimationFrame(step);
+      } else {
+        onDone();
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  // Initialise from storage / system preference
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const startDark = stored ? stored === 'dark' : prefersDark;
+
+  slider.value = startDark ? '0' : '100';
+  updateBars(Number(slider.value));
+
+  // Live bar update while dragging
+  slider.addEventListener('input', () => {
+    updateBars(Number(slider.value));
+  });
+
+  // On release: snap to 0 (dark) or 100 (light)
+  slider.addEventListener('change', () => {
+    const val = Number(slider.value);
+    const target = val >= 50 ? 100 : 0;
+    animateTo(val, target, () => {
+      applyTheme(target === 0);
+    });
+  });
+</script>

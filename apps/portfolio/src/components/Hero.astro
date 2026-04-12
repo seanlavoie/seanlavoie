@@ -13,19 +13,19 @@ import { profile } from '@/data/profile';
         Hi, I'm
       </p>
       <h1
-        class="hero-animate hero-name-glow text-5xl sm:text-6xl font-bold text-slate-100 mb-4 leading-tight"
+        class="hero-animate hero-name-glow text-5xl sm:text-6xl font-bold text-slate-900 mb-4 leading-tight dark:text-slate-100"
         style="animation-delay: 60ms"
       >
         {profile.name}
       </h1>
       <h2
-        class="hero-animate text-2xl sm:text-3xl font-semibold text-slate-400 mb-6"
+        class="hero-animate text-2xl sm:text-3xl font-semibold text-slate-600 mb-6 dark:text-slate-400"
         style="animation-delay: 120ms"
       >
         {profile.title}
       </h2>
       <p
-        class="hero-animate text-lg text-slate-300 leading-relaxed mb-10 max-w-xl"
+        class="hero-animate text-lg text-slate-700 leading-relaxed mb-10 max-w-xl dark:text-slate-300"
         style="animation-delay: 180ms"
       >
         {profile.tagline}
@@ -43,7 +43,7 @@ import { profile } from '@/data/profile';
         </a>
         <a
           href="#contact"
-          class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-500 hover:text-slate-100 transition-colors"
+          class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:border-slate-500 hover:text-slate-900 transition-colors dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:text-slate-100"
         >
           Get in touch
         </a>
@@ -53,7 +53,7 @@ import { profile } from '@/data/profile';
 
   <!-- Scroll indicator: deliberate slow pulse, not bouncy -->
   <div
-    class="scroll-indicator absolute bottom-8 left-1/2 flex flex-col items-center gap-1 text-slate-500"
+    class="scroll-indicator absolute bottom-8 left-1/2 flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500"
     aria-hidden="true"
   >
     <span class="font-mono text-xs tracking-widest">scroll</span>
@@ -70,8 +70,7 @@ import { profile } from '@/data/profile';
         stroke="currentColor"
         stroke-width="1.5"
         stroke-linecap="round"
-        stroke-linejoin="round"
-      />
+        stroke-linejoin="round"></path>
     </svg>
   </div>
 </section>
