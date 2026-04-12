@@ -1,7 +1,6 @@
 ---
 import { profile } from '@/data/profile';
 
-// Skills grouped by category (wireframe spec: Languages / Infrastructure / Data)
 const skillGroups = [
   {
     label: 'Languages',
@@ -9,11 +8,38 @@ const skillGroups = [
   },
   {
     label: 'Infrastructure',
-    skills: ['Kubernetes', 'Terraform', 'AWS', 'GCP'],
+    skills: ['Kubernetes', 'Docker', 'Terraform', 'AWS', 'GCP', 'Linux'],
   },
   {
     label: 'Data',
-    skills: ['PostgreSQL'],
+    skills: ['PostgreSQL', 'Redis', 'Kafka'],
+  },
+  {
+    label: 'Frameworks & Tools',
+    skills: ['gRPC', 'GraphQL', 'CI/CD', 'Datadog'],
+  },
+];
+
+const focusAreas = [
+  {
+    title: 'Security & Detection',
+    description:
+      'Building detection engines, threat intelligence pipelines, and security tooling that operates at scale.',
+  },
+  {
+    title: 'Data Platforms',
+    description:
+      'Designing data pipelines, storage layers, and analytics infrastructure for high-throughput systems.',
+  },
+  {
+    title: 'Developer Tooling',
+    description:
+      'Crafting frameworks, SDKs, and internal platforms that make engineering teams more productive.',
+  },
+  {
+    title: 'Agentic Systems',
+    description:
+      'Building AI-powered agents that make complex decisions and operate autonomously in production.',
   },
 ];
 ---
@@ -46,7 +72,7 @@ const skillGroups = [
         </p>
       </div>
 
-      <!-- Right column: skills only (Links box removed — lives in Contact + Footer) -->
+      <!-- Right column: skills -->
       <div class="reveal">
         <div
           class="rounded-xl border border-slate-200 bg-slate-50 p-6 card-shadow dark:border-slate-800 dark:bg-slate-900/50"
@@ -76,6 +102,31 @@ const skillGroups = [
             }
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Focus areas -->
+    <div class="mt-16">
+      <div class="reveal">
+        <h3
+          class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-8 dark:text-slate-400"
+        >
+          Focus areas
+        </h3>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {
+          focusAreas.map((area) => (
+            <div class="reveal rounded-xl border border-slate-200 bg-slate-50 p-5 card-shadow dark:border-slate-800 dark:bg-slate-900/50">
+              <h4 class="text-sm font-semibold text-slate-900 mb-2 dark:text-slate-100">
+                {area.title}
+              </h4>
+              <p class="text-sm text-slate-600 leading-relaxed dark:text-slate-400">
+                {area.description}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>

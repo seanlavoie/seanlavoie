@@ -25,15 +25,21 @@ import { profile } from '@/data/profile';
         {profile.title}
       </h2>
       <p
-        class="hero-animate text-lg text-slate-700 leading-relaxed mb-10 max-w-xl dark:text-slate-300"
+        class="hero-animate text-lg text-slate-700 leading-relaxed mb-3 max-w-xl dark:text-slate-300"
         style="animation-delay: 180ms"
       >
         {profile.tagline}
       </p>
+      <p
+        class="hero-animate font-mono text-sm text-slate-500 mb-10 tracking-wide dark:text-slate-400"
+        style="animation-delay: 220ms"
+      >
+        {profile.careerPath}
+      </p>
       <!-- Mobile: stack full-width; sm+: side by side -->
       <div
         class="hero-animate flex flex-col sm:flex-row gap-4"
-        style="animation-delay: 240ms"
+        style="animation-delay: 280ms"
       >
         <a
           href="#projects"

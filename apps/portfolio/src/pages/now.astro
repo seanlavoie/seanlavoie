@@ -1,0 +1,92 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { profile } from '@/data/profile';
+---
+
+<BaseLayout title="Now" description={`What ${profile.name} is up to right now.`}>
+  <Nav />
+  <main class="pt-28 pb-24">
+    <div class="mx-auto max-w-3xl px-6">
+      <div class="reveal">
+        <p class="font-mono text-sm text-brand-400 mb-2 tracking-wide">
+          /now
+        </p>
+        <h1
+          class="text-3xl font-bold text-slate-900 mb-2 dark:text-slate-100"
+        >
+          What I'm doing now
+        </h1>
+        <p class="text-sm text-slate-500 mb-12 font-mono dark:text-slate-400">
+          Updated April 2026
+        </p>
+      </div>
+
+      <div class="reveal space-y-10">
+        <section>
+          <h2
+            class="text-lg font-semibold text-slate-900 mb-3 dark:text-slate-100"
+          >
+            Work
+          </h2>
+          <p class="text-slate-700 leading-relaxed dark:text-slate-300">
+            Building at Placer AI. Focused on scalable data platforms and
+            infrastructure that powers location analytics at scale.
+          </p>
+        </section>
+
+        <section>
+          <h2
+            class="text-lg font-semibold text-slate-900 mb-3 dark:text-slate-100"
+          >
+            Side projects
+          </h2>
+          <p class="text-slate-700 leading-relaxed dark:text-slate-300">
+            Experimenting with agentic systems — building autonomous agents that
+            coordinate, plan, and make complex decisions in production
+            environments. Also tinkering with personal infrastructure and
+            homelabbing.
+          </p>
+        </section>
+
+        <section>
+          <h2
+            class="text-lg font-semibold text-slate-900 mb-3 dark:text-slate-100"
+          >
+            Learning
+          </h2>
+          <p class="text-slate-700 leading-relaxed dark:text-slate-300">
+            Deepening knowledge of AI/ML systems, security engineering patterns,
+            and Rust for systems-level work.
+          </p>
+        </section>
+
+        <section>
+          <h2
+            class="text-lg font-semibold text-slate-900 mb-3 dark:text-slate-100"
+          >
+            Outside of code
+          </h2>
+          <p class="text-slate-700 leading-relaxed dark:text-slate-300">
+            Bay Area based. Enjoying the outdoors, good coffee, and the
+            occasional deep rabbit hole that has nothing to do with software.
+          </p>
+        </section>
+      </div>
+
+      <div class="reveal mt-16 pt-8 border-t border-slate-200/50 dark:border-slate-800/50">
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+          This is a <a
+            href="https://nownownow.com/about"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-brand-400 hover:text-brand-300 transition-colors"
+          >now page</a>. It's a snapshot of what I'm focused on at this point in
+          my life.
+        </p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
