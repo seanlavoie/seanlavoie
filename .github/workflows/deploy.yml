@@ -41,24 +41,16 @@ jobs:
       - name: Build blog
         run: pnpm --filter blog build
 
-      # Merge outputs into a single deployable tree.
-      #
-      # Current layout (GitHub Pages subdirectory, no custom domain):
-      #   portfolio:  base='/seanlavoie'  → served at seanlavoie.github.io/seanlavoie/
-      #   blog:       base='/seanlavoie/blog' → served at seanlavoie.github.io/seanlavoie/blog/
-      #
-      # Migrating to a custom domain (seanlavoie.com):
-      #   1. Remove `base` from apps/portfolio/astro.config.mjs
-      #   2. Change blog base to '/blog' in apps/blog/astro.config.mjs
-      #   3. Change blog link in apps/portfolio/src/data/profile.ts back to '/blog'
-      #   4. Re-add `echo "seanlavoie.com" > dist/CNAME` below
-      #   5. Set up DNS A records → 185.199.108-111.153 and verify in repo Settings → Pages
+      # Portfolio builds to dist/ (served at seanlavoie.com/)
+      # Blog builds to dist/blog/ (served at seanlavoie.com/blog/)
+      # CNAME tells GitHub Pages to serve from the custom domain.
       - name: Assemble site artifact
         run: |
           mkdir -p dist
           cp -r apps/portfolio/dist/. dist/
           mkdir -p dist/blog
           cp -r apps/blog/dist/. dist/blog/
+          echo "seanlavoie.com" > dist/CNAME
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
