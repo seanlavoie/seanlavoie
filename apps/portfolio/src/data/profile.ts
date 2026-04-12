@@ -2,9 +2,9 @@ export const profile = {
   name: 'Sean Lavoie',
   handle: 'seanlavoie',
   title: 'Software Engineer',
-  tagline: '9+ years building distributed systems, developer tooling, and products at scale.',
+  tagline: '8+ years building distributed systems, developer tooling, and products at scale.',
   bio: [
-    'I\'m a software engineer with over nine years of experience across backend systems, infrastructure, and developer tooling. I care deeply about clean architecture, operational simplicity, and shipping things that matter.',
+    'I\'m a software engineer with over eight years of experience across backend systems, infrastructure, and developer tooling. I care deeply about clean architecture, operational simplicity, and shipping things that matter.',
     'Outside of work I spend time on personal infrastructure, open source, and the occasional side project that refuses to stay side.',
   ],
   location: 'Remote',
