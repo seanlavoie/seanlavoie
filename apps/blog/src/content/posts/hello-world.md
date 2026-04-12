@@ -13,12 +13,6 @@ tooling, the occasional opinion on software craft, and whatever I'm building or 
 
 No newsletter. No comments. Just posts.
 
-## Why now?
-
-I wanted a system I actually owned — a repo I control, a domain I pay for, zero algorithmic feed between
-my writing and the reader. This felt like the right time to set it up properly instead of perpetually
-adding it to the backlog.
-
 ## What to expect
 
 - Technical deep-dives on things I'm working through
