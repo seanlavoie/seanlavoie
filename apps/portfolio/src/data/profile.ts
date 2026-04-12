@@ -13,7 +13,8 @@ export const profile = {
     github: 'https://github.com/seanlavoie',
     linkedin: 'https://linkedin.com/in/seanlavoie', // verify — update if URL slug differs
     email: 'seanlavoie@gmail.com',                  // update to domain email once hello@seanlavoie.com is configured
-    blog: '/blog',
+    // GitHub Pages path — change to '/blog' when custom domain is active
+    blog: '/seanlavoie/blog',
   },
 } as const;
 
