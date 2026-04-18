@@ -3,7 +3,7 @@ title: 'The Case for Boring Infrastructure in AI Systems'
 description: 'The model is the innovation. Everything around it should be as predictable as possible. A complexity-budget argument for choosing PostgreSQL over the hot new vector database.'
 pubDate: '2026-04-18'
 tags: ['infrastructure', 'agents', 'opinion', 'architecture']
-draft: true
+draft: false
 ---
 
 There is a mental model from software infrastructure that goes like this: you have a finite budget of novelty to spend across your stack. Every new technology you adopt is a withdrawal. When your budget is exhausted, each additional unfamiliar system makes the whole harder to debug, operate, and reason about. Spend your novelty budget on the parts that are actually your product. Spend nothing on the rest.
