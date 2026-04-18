@@ -1,6 +1,6 @@
 ---
 title: 'Authentication Is Still the Hardest Problem in Software'
-description: 'After years on Box's Identity & Security team, a case for why auth remains perpetually underestimated — not because the protocols are broken, but because the gap between "we use OAuth" and "our auth actually works" is enormous.'
+description: "After years on Box's Identity & Security team, a case for why auth remains perpetually underestimated — not because the protocols are broken, but because the gap between \"we use OAuth\" and \"our auth actually works\" is enormous."
 pubDate: '2026-04-18'
 tags: ['security', 'infrastructure', 'opinion']
 draft: true

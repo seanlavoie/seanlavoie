@@ -1,5 +1,5 @@
 ---
-title: 'The Graveyard of Internal Tools I've Built'
+title: "The Graveyard of Internal Tools I've Built"
 description: 'A retrospective on eight years of developer tooling across four companies. What survived a reorg. What died when the champion left. What I got wrong about why tools fail.'
 pubDate: '2026-04-18'
 tags: ['developer-tooling', 'career', 'opinion']
