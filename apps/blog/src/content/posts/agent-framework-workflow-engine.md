@@ -1,7 +1,7 @@
 ---
 title: 'Your Agent Framework Is a Workflow Engine in Denial'
 description: 'Every serious agent framework eventually reinvents Temporal. The ones that do it badly are the ones that do not know that is what they are doing.'
-pubDate: '2026-04-18'
+pubDate: '2026-04-17'
 tags: ['agents', 'distributed-systems', 'architecture', 'opinion']
 draft: true
 ---

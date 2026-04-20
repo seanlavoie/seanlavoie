@@ -1,7 +1,7 @@
 ---
 title: 'Incident Response When the System Has Opinions'
 description: 'Traditional incident response assumes deterministic systems. What changes when your system can creatively decide to do the wrong thing? A practical guide to runbooks and response patterns for agent failures.'
-pubDate: '2026-04-18'
+pubDate: '2026-03-07'
 tags: ['agents', 'infrastructure', 'security', 'opinion']
 draft: false
 ---

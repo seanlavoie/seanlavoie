@@ -1,7 +1,7 @@
 ---
 title: 'Observability for Systems That Lie to You'
 description: 'Your agent returns 200 OK and is confidently wrong. Traditional health checks catch crashes. They do not catch a system doing the wrong thing with full conviction.'
-pubDate: '2026-04-18'
+pubDate: '2025-12-09'
 tags: ['agents', 'observability', 'security', 'infrastructure']
 draft: false
 ---

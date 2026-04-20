@@ -1,7 +1,7 @@
 ---
 title: 'Why Every Data Pipeline Eventually Becomes a DAG'
 description: 'No matter how simple your data pipeline starts, it converges on a directed acyclic graph. Fighting that convergence is how you get architectural debt. Embracing it is how you get reliability.'
-pubDate: '2026-04-18'
+pubDate: '2026-04-08'
 tags: ['data', 'infrastructure', 'architecture']
 draft: false
 ---

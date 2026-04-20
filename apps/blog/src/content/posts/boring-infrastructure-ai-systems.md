@@ -1,7 +1,7 @@
 ---
 title: 'The Case for Boring Infrastructure in AI Systems'
 description: 'The model is the innovation. Everything around it should be as predictable as possible. A complexity-budget argument for choosing PostgreSQL over the hot new vector database.'
-pubDate: '2026-04-18'
+pubDate: '2025-11-03'
 tags: ['infrastructure', 'agents', 'opinion', 'architecture']
 draft: false
 ---

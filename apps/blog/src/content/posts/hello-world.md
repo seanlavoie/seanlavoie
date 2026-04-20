@@ -1,7 +1,7 @@
 ---
 title: 'Hello, World'
 description: 'First post — why I finally set up a blog after nine years of meaning to.'
-pubDate: '2026-04-11'
+pubDate: '2025-10-14'
 tags: ['meta', 'writing']
 draft: false
 ---

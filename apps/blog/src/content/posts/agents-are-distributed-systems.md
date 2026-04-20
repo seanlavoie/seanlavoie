@@ -1,7 +1,7 @@
 ---
 title: 'Agents Are Just Distributed Systems With Opinions'
 description: 'Most of the hard problems in agentic systems are distributed systems problems you have been solving for years. The LLM is just a nondeterministic function in the middle.'
-pubDate: '2026-04-18'
+pubDate: '2026-01-22'
 tags: ['agents', 'distributed-systems', 'infrastructure', 'opinion']
 draft: false
 ---
