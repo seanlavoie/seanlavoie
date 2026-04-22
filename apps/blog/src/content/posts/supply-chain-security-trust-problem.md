@@ -3,7 +3,7 @@ title: 'Supply Chain Security Is a Trust Problem We Keep Solving Wrong'
 description: 'Software supply chain attacks are not getting more sophisticated. Your dependency graph is getting bigger and the trust model underneath it was never designed for this.'
 pubDate: '2026-04-22'
 tags: ['security', 'infrastructure', 'opinion']
-draft: true
+draft: false
 ---
 
 In March 2024, a backdoor was discovered in xz-utils — a compression library so foundational that it sits in the dependency chain of SSH on most Linux distributions. The attacker spent two years building trust. They contributed patches. They pressured the original maintainer — who was burned out and maintaining the project alone — until commit access was handed over. Then they introduced a backdoor that would have given them remote code execution on most Linux servers on the internet.
